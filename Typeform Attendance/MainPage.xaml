@@ -13,7 +13,21 @@
         <Button x:Name="refreshButton" Content="Refresh Now" HorizontalAlignment="Left" Margin="242,402,0,0" VerticalAlignment="Top" FontSize="22" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="Refresh_Click"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="150,524,0,0" TextWrapping="Wrap" Text="Average number of Attendees in Meeting:" VerticalAlignment="Top" FontSize="22"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="607,524,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
-        <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="624,242,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+        <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="624,242,0,0" VerticalAlignment="Top" IsEnabled="False" Time="0"/>
+        <Pivot x:Name="HeaderBar" Title="Pivot">
+            <PivotItem Header="Main">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="Attendance">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="Mailing List">
+                <Grid/>
+            </PivotItem>
+            <PivotItem Header="Settings">
+                <Grid/>
+            </PivotItem>
+        </Pivot>
 
     </Grid>
 </Page>

@@ -17,7 +17,6 @@ namespace Typeform_Attendance
             task.Wait();
             Rootobject temp = task.Result;
             rootObject = temp;
-            System.Diagnostics.Debug.WriteLine(rootObject);
         }
 
         async private static Task<Rootobject> DownloadData(string url)
@@ -28,13 +27,14 @@ namespace Typeform_Attendance
                 string responseBody = String.Empty;
                 try
                 {
-                    var response = await w.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
-                    responseBody = await response.Content.ReadAsStringAsync();
+                    var response = await w.GetAsync(url).ConfigureAwait(continueOnCapturedContext: false);
+                   response.EnsureSuccessStatusCode();
+                    responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(continueOnCapturedContext: false);
                 }
                 catch (Exception) { }
                 // if string with JSON data is not empty, deserialize it to class and return its instance 
-                return !string.IsNullOrEmpty(responseBody) ? (Rootobject)JsonConvert.DeserializeObject(responseBody) : new Rootobject(); ;
+                System.Diagnostics.Debug.WriteLine(responseBody);
+                return !string.IsNullOrEmpty(responseBody) ? JsonConvert.DeserializeObject<Rootobject>(responseBody) : new Rootobject(); ;
             }
         }
     }
