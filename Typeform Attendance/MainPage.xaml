@@ -8,7 +8,7 @@
     xmlns:toolkit="using:MyToolkit.Controls"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
         <Pivot x:Name="HeaderBar" Title="A Victory Labs Production Copyright © 2016" PivotItemLoaded="HeaderBar_PivotItemLoaded">
             <PivotItem Header="Main">
                 <Grid x:Name="MainGrid">
@@ -66,6 +66,7 @@
                     <TextBox x:Name="textBoxUID" HorizontalAlignment="Left" Margin="194,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PlaceholderText="Enter 6 character UID Here" LostFocus="textBoxUID_LostFocus"/>
                     <TextBlock HorizontalAlignment="Left" Margin="50,200,0,0" TextWrapping="Wrap" Text="Number of Emails per Page:" VerticalAlignment="Top" FontSize="22"/>
                     <TextBox x:Name="textBoxEmailPage" HorizontalAlignment="Left" Margin="327,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PlaceholderText="50" InputScope="Number" LostFocus="textBoxEmailPage_LostFocus"/>
+                    <Button x:Name="buttonClear" Content="Clear All Saved Data" HorizontalAlignment="Left" Margin="50,267,0,0" VerticalAlignment="Top" FontSize="22" Click="buttonClear_Click"/>
                 </Grid>
             </PivotItem>
         </Pivot>

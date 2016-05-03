@@ -43,6 +43,9 @@ namespace Typeform_Attendance
 
             if (rootObject != null)
                 responseArray = rootObject.responses;
+            if (responseArray == null)
+                return emailList;
+
             foreach (Respons each in responseArray)
             {
                 string firstName = each.answers.textfield_21284714;
@@ -76,6 +79,9 @@ namespace Typeform_Attendance
 
             if (rootObject != null)
                 responseArray = rootObject.responses;
+            if(responseArray == null)
+                return 0;
+
             foreach (Respons each in responseArray)
             {
                 string firstName = each.answers.textfield_21284714;
@@ -123,6 +129,9 @@ namespace Typeform_Attendance
 
             if(rootObject != null)
                 responseArray = rootObject.responses;
+            if (responseArray == null)
+                return personList;
+
             foreach (Respons each in responseArray)
             {
                 string firstName = each.answers.textfield_21284714;
