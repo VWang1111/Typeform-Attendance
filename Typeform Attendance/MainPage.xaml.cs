@@ -62,5 +62,15 @@ namespace Typeform_Attendance
         {
 
         }
+
+        private void textBoxAPI_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textBoxAPI.Text = String.Empty;
+        }
+
+        private void textBoxUID_GotFocus(object sender, RoutedEventArgs e)
+        {
+            textBoxUID.Text = String.Empty;
+        }
     }
 }

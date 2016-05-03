@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot x:Name="HeaderBar" Title="Pivot" PivotItemLoaded="HeaderBar_PivotItemLoaded">
+        <Pivot x:Name="HeaderBar" Title="Typeform Attendance" PivotItemLoaded="HeaderBar_PivotItemLoaded">
             <PivotItem Header="Main">
                 <Grid x:Name="MainGrid">
                     <DatePicker x:Name="DateBox" HorizontalAlignment="Left" Margin="261,106,0,0" VerticalAlignment="Top" IsEnabled="False"/>
@@ -47,10 +47,10 @@
             </PivotItem>
             <PivotItem Header="Settings">
                 <Grid x:Name="SettingsGrid">
-                    <TextBlock x:Name="textBoxAPI" HorizontalAlignment="Left" Margin="50,73,0,0" TextWrapping="Wrap" Text="API Key:" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBlock x:Name="textBoxUID" HorizontalAlignment="Left" Margin="50,138,0,0" TextWrapping="Wrap" Text="Typeform UID:" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBox x:Name="textBlockAPI" HorizontalAlignment="Left" Margin="135,73,0,0" TextWrapping="Wrap" Text="Enter API Key Here" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBoxUID1" HorizontalAlignment="Left" Margin="194,138,0,0" TextWrapping="Wrap" Text="Enter 6 character UID Here" VerticalAlignment="Top"/>
+                    <TextBlock x:Name="textBlockAPI" HorizontalAlignment="Left" Margin="50,73,0,0" TextWrapping="Wrap" Text="API Key:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="textBlockUID" HorizontalAlignment="Left" Margin="50,138,0,0" TextWrapping="Wrap" Text="Typeform UID:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="textBoxAPI" HorizontalAlignment="Left" Margin="135,73,0,0" TextWrapping="Wrap" Text="Enter API Key Here" VerticalAlignment="Top" GotFocus="textBoxAPI_GotFocus"/>
+                    <TextBox x:Name="textBoxUID" HorizontalAlignment="Left" Margin="194,138,0,0" TextWrapping="Wrap" Text="Enter 6 character UID Here" VerticalAlignment="Top" GotFocus="textBoxUID_GotFocus"/>
                 </Grid>
             </PivotItem>
         </Pivot>

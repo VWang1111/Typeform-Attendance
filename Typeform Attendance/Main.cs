@@ -25,7 +25,10 @@ namespace Typeform_Attendance
         {
             ArrayList personList = new ArrayList();
 
-            Respons[] responseArray = rootObject.responses;
+            Respons[] responseArray = new Respons[0];
+
+            if(rootObject != null)
+                responseArray = rootObject.responses;
             foreach (Respons each in responseArray)
             {
                 string firstName = each.answers.textfield_21284714;
