@@ -56,12 +56,14 @@ namespace Typeform_Attendance
                 {
                     System.Diagnostics.Debug.WriteLine(p);
                 }
+                DataGrid.ItemsSource = new List<Person>();
                 DataGrid.ItemsSource = personList;
             }
 
             if(HeaderBar.SelectedIndex == 2)
             {
                 PageTextBlock.Text = "1";
+                MailDataGrid.ItemsSource = new List<Person>();
                 MailDataGrid.ItemsSource = Main.getEmails(1);
             }
         }
@@ -71,7 +73,8 @@ namespace Typeform_Attendance
             if(Int32.Parse(PageTextBlock.Text) > 1)
             {
                 PageTextBlock.Text = (Int32.Parse(PageTextBlock.Text)-1).ToString();
-                MailDataGrid.ItemsSource = Main.getEmails(Int32.Parse(PageTextBlock.Text) - 1);
+                MailDataGrid.ItemsSource = new List<Person>();
+                MailDataGrid.ItemsSource = Main.getEmails(Int32.Parse(PageTextBlock.Text));
             }
         }
 
@@ -81,6 +84,7 @@ namespace Typeform_Attendance
             if(emailList.Count != 0)
             {
                 PageTextBlock.Text = (Int32.Parse(PageTextBlock.Text) + 1).ToString();
+                MailDataGrid.ItemsSource = new List<Person>();
                 MailDataGrid.ItemsSource = emailList;
             }
         }

@@ -59,8 +59,8 @@ namespace Typeform_Attendance
             int emailForThisPage = emailPerPage;
             if (startList > emailList.Count)
                 return subList;
-            if (emailForThisPage > emailList.Count - startList * emailForThisPage)
-                emailForThisPage = emailList.Count - startList * emailForThisPage;
+            if (emailForThisPage > emailList.Count - startList)
+                emailForThisPage = emailList.Count - startList;
             subList = emailList.GetRange(startList, emailForThisPage);
 
             return subList;
