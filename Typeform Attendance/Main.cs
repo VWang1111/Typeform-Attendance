@@ -12,6 +12,7 @@ namespace Typeform_Attendance
     class Main
     {
         private static Rootobject rootObject;
+        private static int emailPerPage = 50;
 
         public static Rootobject RootObject
         {
@@ -19,6 +20,99 @@ namespace Typeform_Attendance
             {
                 return rootObject;
             }
+        }
+
+        public static int EmailPerPage
+        {
+            get
+            {
+                return emailPerPage;
+            }
+
+            set
+            {
+                emailPerPage = value;
+            }
+        }
+
+        public static List<Person> getEmails(int page)
+        {
+            List<Person> emailList = new List<Person>();
+
+            Respons[] responseArray = new Respons[0];
+
+            if (rootObject != null)
+                responseArray = rootObject.responses;
+            foreach (Respons each in responseArray)
+            {
+                string firstName = each.answers.textfield_21284714;
+                string lastName = each.answers.textfield_21284762;
+                string email = each.answers.email_21284788;
+                Person person = new Person(firstName, lastName, email);
+
+                if (!emailList.Contains(person) && person.Email != "")
+                    emailList.Add(person);
+            }
+            List<Person> subList = new List<Person>();
+
+            int startList = (page - 1) * emailPerPage;
+            int emailForThisPage = emailPerPage;
+            if (startList > emailList.Count)
+                return subList;
+            if (emailForThisPage > emailList.Count - startList * emailForThisPage)
+                emailForThisPage = emailList.Count - startList * emailForThisPage;
+            subList = emailList.GetRange(startList, emailForThisPage);
+
+            return subList;
+        }
+
+        public static int getAverageAttendance()
+        {
+            int totalAttendance = 0;
+
+            ArrayList personList = new ArrayList();
+
+            Respons[] responseArray = new Respons[0];
+
+            if (rootObject != null)
+                responseArray = rootObject.responses;
+            foreach (Respons each in responseArray)
+            {
+                string firstName = each.answers.textfield_21284714;
+                string lastName = each.answers.textfield_21284762;
+                string email = each.answers.email_21284788;
+                Person person = new Person(firstName, lastName, email);
+
+                personList.Add(person);
+            }
+
+            Dictionary<Person, int> dict = new Dictionary<Person, int>();
+
+            foreach (Person p in personList)
+            {
+                Person temp = new Person(p.FirstName, p.LastName, "");
+                if (dict.ContainsKey(temp))
+                {
+                    dict[temp] += 1;
+                }
+                else
+                {
+                    dict.Add(temp, 1);
+                }
+            }
+
+            int maxValue = 0;
+            foreach(int i in dict.Values)
+            {
+                if (i > maxValue)
+                    maxValue = i;
+                totalAttendance += i;
+            }
+
+            if (maxValue == 0)
+                return 0;
+
+            return totalAttendance/maxValue;
         }
 
         public static ArrayList getAttendance()
@@ -35,6 +129,7 @@ namespace Typeform_Attendance
                 string lastName = each.answers.textfield_21284762;
                 string email = each.answers.email_21284788;
                 Person person = new Person(firstName, lastName, email);
+
                 personList.Add(person);
             }
 
@@ -42,7 +137,7 @@ namespace Typeform_Attendance
 
             foreach(Person p in personList)
             {
-                Person temp = new Person(p.FirstName, p.LastName, p.Email);
+                Person temp = new Person(p.FirstName, p.LastName, "");
                 if (dict.ContainsKey(temp))
                 {
                     dict[temp] += 1;
@@ -55,12 +150,20 @@ namespace Typeform_Attendance
 
             personList = new ArrayList();
 
-            foreach(Person p in dict.Keys)
+            responseArray = new Respons[0];
+
+            if (rootObject != null)
+                responseArray = rootObject.responses;
+            foreach (Respons each in responseArray)
             {
-                Person temp = new Person(p.FirstName, p.LastName, p.Email);
-                temp.Meeting = dict[p];
-                if(!personList.Contains(temp))
-                    personList.Add(temp);
+                string firstName = each.answers.textfield_21284714;
+                string lastName = each.answers.textfield_21284762;
+                string email = each.answers.email_21284788;
+                Person temp = new Person(firstName, lastName, "");
+                Person person = new Person(firstName, lastName, email);
+                person.Meeting = dict[temp];
+                if (!personList.Contains(person))
+                    personList.Add(person);
             }
 
             return personList;

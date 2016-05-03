@@ -9,14 +9,14 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot x:Name="HeaderBar" Title="Typeform Attendance" PivotItemLoaded="HeaderBar_PivotItemLoaded">
+        <Pivot x:Name="HeaderBar" Title="A Victory Labs Production Copyright © 2016" PivotItemLoaded="HeaderBar_PivotItemLoaded">
             <PivotItem Header="Main">
                 <Grid x:Name="MainGrid">
                     <DatePicker x:Name="DateBox" HorizontalAlignment="Left" Margin="261,106,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="60,109,0,0" TextWrapping="Wrap" Text="Last refreshed on:" VerticalAlignment="Top" FontSize="22"/>
                     <Button x:Name="refreshButton" Content="Refresh Now" HorizontalAlignment="Left" Margin="187,239,0,0" VerticalAlignment="Top" FontSize="22" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="Refresh_Click"/>
                     <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="96,367,0,0" TextWrapping="Wrap" Text="Average number of Attendees in Meeting:" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="545,367,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="averageAttending" HorizontalAlignment="Left" Margin="545,367,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
                     <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="607,106,0,0" VerticalAlignment="Top" IsEnabled="False" Time="0"/>
                 </Grid>
             </PivotItem>
@@ -43,14 +43,29 @@
                 </toolkit:DataGrid>
             </PivotItem>
             <PivotItem Header="Mailing List">
-                <Grid/>
+                <Grid x:Name="MailGrid">
+                    <Button x:Name="PrevPageButton" Content="Previous Page" HorizontalAlignment="Left" Margin="32,30,0,0" VerticalAlignment="Top" FontSize="22" Click="PrevPageButton_Click"/>
+                    <Button x:Name="NextPageButton" Content="Next Page" HorizontalAlignment="Left" Margin="237,30,0,0" VerticalAlignment="Top" FontSize="22" Click="NextPageButton_Click"/>
+                    <Button x:Name="ClipboardButton" Content="Copy to Clipboard" HorizontalAlignment="Left" Margin="402,30,0,0" VerticalAlignment="Top" FontSize="22" Click="ClipboardButton_Click"/>
+                    <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="634,36,0,0" TextWrapping="Wrap" Text="Page: " VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="PageTextBlock" HorizontalAlignment="Left" Margin="708,36,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
+                    <toolkit:DataGrid ItemsSource="{Binding Person}" x:Name="MailDataGrid" SelectionMode="Single" DefaultOrderIndex="1" Margin="0,90,0,0">
+                        <toolkit:DataGrid.Columns>
+                            <toolkit:DataGridTextColumn Width="200" Header="First Name" Binding="{Binding FirstName}"/>
+                            <toolkit:DataGridTextColumn Width="200" Header="Last Name" Binding="{Binding LastName}" IsAscendingDefault="False"/>
+                            <toolkit:DataGridTextColumn Width="200" Header="Email" Binding="{Binding Email}"/>
+                        </toolkit:DataGrid.Columns>
+                    </toolkit:DataGrid>
+                </Grid>
             </PivotItem>
             <PivotItem Header="Settings">
                 <Grid x:Name="SettingsGrid">
-                    <TextBlock x:Name="textBlockAPI" HorizontalAlignment="Left" Margin="50,73,0,0" TextWrapping="Wrap" Text="API Key:" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBlock x:Name="textBlockUID" HorizontalAlignment="Left" Margin="50,138,0,0" TextWrapping="Wrap" Text="Typeform UID:" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBox x:Name="textBoxAPI" HorizontalAlignment="Left" Margin="135,73,0,0" TextWrapping="Wrap" Text="Enter API Key Here" VerticalAlignment="Top" GotFocus="textBoxAPI_GotFocus"/>
-                    <TextBox x:Name="textBoxUID" HorizontalAlignment="Left" Margin="194,138,0,0" TextWrapping="Wrap" Text="Enter 6 character UID Here" VerticalAlignment="Top" GotFocus="textBoxUID_GotFocus"/>
+                    <TextBlock x:Name="textBlockAPI" HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="API Key:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="textBlockUID" HorizontalAlignment="Left" Margin="50,125,0,0" TextWrapping="Wrap" Text="Typeform UID:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="textBoxAPI" HorizontalAlignment="Left" Margin="135,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PlaceholderText="Enter API Key Here" LostFocus="textBoxAPI_LostFocus"/>
+                    <TextBox x:Name="textBoxUID" HorizontalAlignment="Left" Margin="194,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PlaceholderText="Enter 6 character UID Here" LostFocus="textBoxUID_LostFocus"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="50,200,0,0" TextWrapping="Wrap" Text="Number of Emails per Page:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="textBoxEmailPage" HorizontalAlignment="Left" Margin="327,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" PlaceholderText="50" InputScope="Number" LostFocus="textBoxEmailPage_LostFocus"/>
                 </Grid>
             </PivotItem>
         </Pivot>

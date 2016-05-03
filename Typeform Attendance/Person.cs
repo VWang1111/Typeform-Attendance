@@ -81,8 +81,19 @@ namespace Typeform_Attendance
             }
             catch(Exception e)
             {
+                System.Diagnostics.Debug.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + firstName.GetHashCode();
+            hash = (hash * 7) + lastName.GetHashCode();
+            hash = (hash * 7) + meeting.GetHashCode();
+            hash = (hash * 7) + email.GetHashCode();
+            return hash;
         }
 
         public override string ToString()

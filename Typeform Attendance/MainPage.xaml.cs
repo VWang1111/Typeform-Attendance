@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
 using MyToolkit.Controls;
+using Windows.ApplicationModel.DataTransfer;
 using System.Collections;
 
 
@@ -33,7 +34,7 @@ namespace Typeform_Attendance
         public MainPage()
         {
             this.InitializeComponent();
-            new MyToolkit.Controls.DataGrid();
+            this.DateBox.Date = new DateTime(0);
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
@@ -43,6 +44,7 @@ namespace Typeform_Attendance
             Main.getRootobject(url);
             DateBox.Date = DateTime.Now;
             TimeBox.Time = DateTime.Now.TimeOfDay;
+            averageAttending.Text = Main.getAverageAttendance().ToString();
         }
 
         private void HeaderBar_PivotItemLoaded(Windows.UI.Xaml.Controls.Pivot sender, PivotItemEventArgs args)
@@ -56,21 +58,75 @@ namespace Typeform_Attendance
                 }
                 DataGrid.ItemsSource = personList;
             }
+
+            if(HeaderBar.SelectedIndex == 2)
+            {
+                PageTextBlock.Text = "1";
+                MailDataGrid.ItemsSource = Main.getEmails(1);
+            }
         }
 
-        private void OnSelectedItemsChanged(EventArgs e)
+        private void PrevPageButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(Int32.Parse(PageTextBlock.Text) > 1)
+            {
+                PageTextBlock.Text = (Int32.Parse(PageTextBlock.Text)-1).ToString();
+                MailDataGrid.ItemsSource = Main.getEmails(Int32.Parse(PageTextBlock.Text) - 1);
+            }
         }
 
-        private void textBoxAPI_GotFocus(object sender, RoutedEventArgs e)
+        private void NextPageButton_Click(object sender, RoutedEventArgs e)
         {
-            textBoxAPI.Text = String.Empty;
+            List<Person> emailList = Main.getEmails(Int32.Parse(PageTextBlock.Text) + 1);
+            if(emailList.Count != 0)
+            {
+                PageTextBlock.Text = (Int32.Parse(PageTextBlock.Text) + 1).ToString();
+                MailDataGrid.ItemsSource = emailList;
+            }
         }
 
-        private void textBoxUID_GotFocus(object sender, RoutedEventArgs e)
+        private void ClipboardButton_Click(object sender, RoutedEventArgs e)
         {
-            textBoxUID.Text = String.Empty;
+            List<Person> emailList = Main.getEmails(Int32.Parse(PageTextBlock.Text));
+            List<String> pureEmailList = new List<String>();
+            foreach(Person p in emailList)
+            {
+                pureEmailList.Add(p.Email);
+            }
+            String toCpy = "";
+
+            foreach(String s in pureEmailList)
+            {
+                toCpy += s + ", ";
+            }
+
+            DataPackage dataPackage = new DataPackage();
+            dataPackage.RequestedOperation = DataPackageOperation.Copy;
+            dataPackage.SetText(toCpy);
+            Clipboard.SetContent(dataPackage);
+        }
+
+        private void textBoxEmailPage_LostFocus(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Main.EmailPerPage = Int32.Parse(textBoxEmailPage.Text);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                textBoxEmailPage.Text = "50";
+            }
+        }
+
+        private void textBoxUID_LostFocus(object sender, RoutedEventArgs e)
+        {
+            typeformUID = textBoxUID.Text;
+        }
+
+        private void textBoxAPI_LostFocus(object sender, RoutedEventArgs e)
+        {
+            typeformAPIKey = textBoxAPI.Text;
         }
     }
 }
