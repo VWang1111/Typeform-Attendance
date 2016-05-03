@@ -12,12 +12,12 @@
         <Pivot x:Name="HeaderBar" Title="Pivot" PivotItemLoaded="HeaderBar_PivotItemLoaded">
             <PivotItem Header="Main">
                 <Grid x:Name="MainGrid">
-                    <DatePicker x:Name="DateBox" HorizontalAlignment="Left" Margin="323,242,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="97,242,0,0" TextWrapping="Wrap" Text="Last refreshed on:" VerticalAlignment="Top" FontSize="22"/>
-                    <Button x:Name="refreshButton" Content="Refresh Now" HorizontalAlignment="Left" Margin="242,402,0,0" VerticalAlignment="Top" FontSize="22" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="Refresh_Click"/>
-                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="150,524,0,0" TextWrapping="Wrap" Text="Average number of Attendees in Meeting:" VerticalAlignment="Top" FontSize="22"/>
-                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="607,524,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
-                    <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="624,242,0,0" VerticalAlignment="Top" IsEnabled="False" Time="0"/>
+                    <DatePicker x:Name="DateBox" HorizontalAlignment="Left" Margin="261,106,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="60,109,0,0" TextWrapping="Wrap" Text="Last refreshed on:" VerticalAlignment="Top" FontSize="22"/>
+                    <Button x:Name="refreshButton" Content="Refresh Now" HorizontalAlignment="Left" Margin="187,239,0,0" VerticalAlignment="Top" FontSize="22" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="Refresh_Click"/>
+                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="96,367,0,0" TextWrapping="Wrap" Text="Average number of Attendees in Meeting:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="545,367,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
+                    <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="607,106,0,0" VerticalAlignment="Top" IsEnabled="False" Time="0"/>
                 </Grid>
             </PivotItem>
             <PivotItem Header="Attendance">
@@ -46,7 +46,12 @@
                 <Grid/>
             </PivotItem>
             <PivotItem Header="Settings">
-                <Grid/>
+                <Grid x:Name="SettingsGrid">
+                    <TextBlock x:Name="textBoxAPI" HorizontalAlignment="Left" Margin="50,73,0,0" TextWrapping="Wrap" Text="API Key:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="textBoxUID" HorizontalAlignment="Left" Margin="50,138,0,0" TextWrapping="Wrap" Text="Typeform UID:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBox x:Name="textBlockAPI" HorizontalAlignment="Left" Margin="135,73,0,0" TextWrapping="Wrap" Text="Enter API Key Here" VerticalAlignment="Top"/>
+                    <TextBox x:Name="textBoxUID1" HorizontalAlignment="Left" Margin="194,138,0,0" TextWrapping="Wrap" Text="Enter 6 character UID Here" VerticalAlignment="Top"/>
+                </Grid>
             </PivotItem>
         </Pivot>
 
