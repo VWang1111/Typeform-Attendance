@@ -5,21 +5,42 @@
     xmlns:local="using:Typeform_Attendance"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:MyToolkit.Controls"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <DatePicker x:Name="DateBox" HorizontalAlignment="Left" Margin="323,242,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="97,242,0,0" TextWrapping="Wrap" Text="Last refreshed on:" VerticalAlignment="Top" FontSize="22"/>
-        <Button x:Name="refreshButton" Content="Refresh Now" HorizontalAlignment="Left" Margin="242,402,0,0" VerticalAlignment="Top" FontSize="22" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="Refresh_Click"/>
-        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="150,524,0,0" TextWrapping="Wrap" Text="Average number of Attendees in Meeting:" VerticalAlignment="Top" FontSize="22"/>
-        <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="607,524,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
-        <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="624,242,0,0" VerticalAlignment="Top" IsEnabled="False" Time="0"/>
-        <Pivot x:Name="HeaderBar" Title="Pivot">
+        <Pivot x:Name="HeaderBar" Title="Pivot" PivotItemLoaded="HeaderBar_PivotItemLoaded">
             <PivotItem Header="Main">
-                <Grid/>
+                <Grid x:Name="MainGrid">
+                    <DatePicker x:Name="DateBox" HorizontalAlignment="Left" Margin="323,242,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="97,242,0,0" TextWrapping="Wrap" Text="Last refreshed on:" VerticalAlignment="Top" FontSize="22"/>
+                    <Button x:Name="refreshButton" Content="Refresh Now" HorizontalAlignment="Left" Margin="242,402,0,0" VerticalAlignment="Top" FontSize="22" IsDoubleTapEnabled="False" IsHoldingEnabled="False" IsRightTapEnabled="False" Click="Refresh_Click"/>
+                    <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="150,524,0,0" TextWrapping="Wrap" Text="Average number of Attendees in Meeting:" VerticalAlignment="Top" FontSize="22"/>
+                    <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="607,524,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" FontSize="22"/>
+                    <TimePicker x:Name="TimeBox" HorizontalAlignment="Left" Margin="624,242,0,0" VerticalAlignment="Top" IsEnabled="False" Time="0"/>
+                </Grid>
             </PivotItem>
             <PivotItem Header="Attendance">
-                <Grid/>
+                <toolkit:DataGrid ItemsSource="{Binding Person}" x:Name="DataGrid" 
+                   SelectionMode="Multiple" DefaultOrderIndex="1">
+                    <toolkit:DataGrid.Columns>
+                        <toolkit:DataGridTextColumn Width="200" Header="Firstname" Binding="{Binding FirstName}"/>
+                        <toolkit:DataGridTextColumn Width="200" Binding="{Binding LastName}" IsAscendingDefault="False">
+                            <toolkit:DataGridTextColumn.Header>
+                                <TextBlock Text="Lastname"/>
+                            </toolkit:DataGridTextColumn.Header>
+                        </toolkit:DataGridTextColumn>
+                        <toolkit:DataGridTextColumn Width="200" Header="Meetings Attended" Binding="{Binding Meeting}"/>
+                    </toolkit:DataGrid.Columns>
+                    <toolkit:DataGrid.ItemDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="10,10,10,5">
+                                <TextBlock Text="Email: " FontWeight="Bold" />
+                                <TextBlock Text="{Binding Email}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </toolkit:DataGrid.ItemDetailsTemplate>
+                </toolkit:DataGrid>
             </PivotItem>
             <PivotItem Header="Mailing List">
                 <Grid/>

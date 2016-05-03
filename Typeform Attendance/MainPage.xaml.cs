@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Net.Http;
+using MyToolkit.Controls;
+using System.Collections;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -31,6 +33,7 @@ namespace Typeform_Attendance
         public MainPage()
         {
             this.InitializeComponent();
+            new MyToolkit.Controls.DataGrid();
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
@@ -42,6 +45,22 @@ namespace Typeform_Attendance
             TimeBox.Time = DateTime.Now.TimeOfDay;
         }
 
-        
+        private void HeaderBar_PivotItemLoaded(Windows.UI.Xaml.Controls.Pivot sender, PivotItemEventArgs args)
+        {
+            if(HeaderBar.SelectedIndex == 1)
+            {
+                List<Person> personList = Main.getAttendance().Cast<Person>().ToList();
+                foreach (Person p in personList)
+                {
+                    System.Diagnostics.Debug.WriteLine(p);
+                }
+                DataGrid.ItemsSource = personList;
+            }
+        }
+
+        private void OnSelectedItemsChanged(EventArgs e)
+        {
+
+        }
     }
 }
